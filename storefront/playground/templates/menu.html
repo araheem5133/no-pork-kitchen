@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block head %}<title>Menu</title>{% endblock %}
+
+{% block content %}
+
+<div class = "container">
+    <br>
+    <div class="jumbotron" style="background-color: white; text-align: center; padding-top: 5px; padding-bottom: 5px;">
+        <h1 class="display-4" style="font-size: 250%;">Menu</h1>
+        <hr class="my-4">
+    </div>
+    {% for msg in messages %}
+      {{msg}}
+    {% endfor %}
+    {% for food in menu %}
+    <div class="card mb-3 text-center">
+        {% load static %}
+        <div class="card-body">
+          <img class="card-img-top" src="{% static food.0  %}" alt="Food image"  style="width: 15rem;">
+          <h5 class="card-title">{{food.1}} . {{food.2}}</h5>
+          <p class="card-text">${{food.3}}</p>
+          <p class="card-text">{{food.4}}</p>
+          <div class="form-group text-center">
+            <form action="" method="POST">
+              {% csrf_token %}
+            <label for="quantity">Quantity:</label>
+            <select class="form-control" id="quantity" name="quantity">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+            </select>
+            <div hidden class="form-outline mb-4">
+              <input id="itemID" class="form-control" name="itemID" value="{{food.1}}"/>
+            </div>
+            <br>
+            <!-- Submit button -->
+            <button name = "checkout" val type="submit" class="btn btn-primary">Add to Cart</button>
+          </form>
+          </div>
+          <br><br>
+    </div>
+    {% endfor %}
+    
+</div>
+
+{% endblock %}

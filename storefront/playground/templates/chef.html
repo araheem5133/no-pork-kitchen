@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+<html>
+  <head>
+    {% block head %}
+    <title>Chef page</title>
+    {% endblock %}
+  </head>
+  <body>
+    {% block content %}
+    <p>CHEF PAGE</p>
+    {% if logged %}
+    <div class = "container">
+      <div class="jumbotron" style="background-color: white; text-align: center; padding-top: 5px; padding-bottom: 5px;">
+        <h1 class="display-4" style="font-size: 250%;">Welcome {{username}}!</h1>
+      </div>
+    </div>
+
+    <section id="menu" class="menu">
+      <div class="jumbotron" style="background-color: white; text-align: center; padding-top: 20px; padding-bottom: 5px;">
+          <h1 class="display-4" style="font-size: 250%;">Your Menu</h1>
+      </div>
+      <div class="container">
+        <div class="list-group">
+        {% for food in foods %}
+
+        {% endfor %}
+        </div>
+      </div>
+
+      <div class = "container">
+        <hr class="my-4">
+      <form action="/chef" method="POST">
+        <!-- Food input -->
+        <div class="form-outline mb-4">
+          <input type="text" id="addedFood" class="form-control" name="addedFood" />
+          <label class="form-label" for="addedFood">Food</label>
+          <input type="text" id="addedPrice" class="form-control" name="addedPrice" />
+          <label class="form-label" for="addedPrice">Price</label>
+        </div>
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary btn-block mb-4">Add Food to Menu</button>
+      
+      </form>
+    </div>
+    
+    {% endif %}
+    {% endblock %}
+  </body>
+</html>

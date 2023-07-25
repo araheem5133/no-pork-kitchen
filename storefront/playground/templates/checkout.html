@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block head %}<title>Checkout</title>{% endblock %}
+
+{% block content %}
+
+<p>Checkout</p>
+
+<div class = "container">
+    <div class="jumbotron" style="background-color: white; text-align: center; padding-top: 5px; padding-bottom: 5px;">
+        <h1 class="display-4" style="font-size: 250%;">Checkout</h1>
+        <hr class="my-4">
+      <h4>Name: {{name}}</h4>
+      <h4>Current Balance: {{balance}}</h4>
+      <br>
+      {% for msg in messages %}
+      {{msg}}
+      {% endfor %}
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Item #</th>
+            <th scope="col">Item Quantity</th>
+            <th scope="col">Price</th>
+            <th scope="'col">Remove?</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in items %}
+          <tr>
+            <td>{{item.0}}</td>
+            <td>{{item.1}}</td>
+            <td>{{item.2}}</td>
+            <td>
+            <form action="" method="POST">
+            {% csrf_token %}
+            <div class="form-outline mb-4">
+              <input hidden id="itemID" class="form-control" name="itemID" value="{{item.3}}"/>
+            <button name = "delete" val type="submit" class="btn btn-primary">Delete?</button>
+            </form>
+            </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <h4>Total Price: {{total_price}}</h4>
+      <br>
+      <form action="" method="POST">
+      {% csrf_token %}
+      <button name = "checkout" val type="submit" class="btn btn-primary">Checkout?</button>
+      </form>
+    </div>
+</div>
+
+{% endblock %}

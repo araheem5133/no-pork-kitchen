@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block head %}<title>Checkout</title>{% endblock %}
+
+{% block content %}
+
+<p>Checkout</p>
+
+<div class = "container">
+    <div class="jumbotron" style="background-color: white; text-align: center; padding-top: 5px; padding-bottom: 5px;">
+        <h1 class="display-4" style="font-size: 250%;">Checkout</h1>
+        <hr class="my-4">
+      <h4>Name: {{name}}</h4>
+      <h4>Current Balance: {{balance}}</h4>
+      <br>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Item #</th>
+            <th scope="col">Item Quantity</th>
+            <th scope="col">Price</th>
+            <th scope="'col">Remove?</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in items %}
+          <tr>
+            <td>{{item}}</td>
+            <td>{{item_quantity}}</td>
+            <td>{{price}}</td>
+            <td><a href="#" class="btn btn-danger">Remove</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <h4>Total Price: {{total_price}}</h4>
+      <br>
+      <a href="#" class="btn btn-success">Checkout</a>
+    </div>
+</div>
+
+{% endblock %}

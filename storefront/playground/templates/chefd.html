@@ -1,0 +1,304 @@
+{% extends 'base.html' %}
+
+{% block head %}<title>Chef Dashboard</title>{% endblock %}
+
+{% block content %}
+
+<div class = "container">
+    <div class="jumbotron" style="background-color: white; text-align: center; padding-top: 5px; padding-bottom: 5px;">
+        {% if isChef %}
+        <h1 class="display-4" style="font-size: 250%;">Chef Dashboard</h1>
+        <hr class="my-4">
+      <h4>Incoming Orders</h4>
+      <br>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Orders</th>
+            <th scope="'col">Prepared?</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in orders %}
+          <tr>
+            <td>
+                <table class="table">
+                    <thead>
+                        <th scope="col">Order Number</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Quantity</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{order.0}}</td>
+                            <td>{{order.1}}</td>
+                            <td>{{order.2}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+            <td>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="form-outline mb-4">
+                      <input hidden id="orderNo" class="form-control" name="orderNo" value="{{order.0}}"/>
+                      <input hidden id="itemID" class="form-control" name="itemID" value="{{order.3}}"/>
+                    <button name = "finish" val type="submit" class="btn btn-primary">Yes</button>
+                </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <br>
+      <a href="#" class="btn btn-primary">Add Item to Menu</a>
+      {% elif isDelivery%}
+      <p>DELIVERY PAGE</p>
+    <div class = "container">
+      <div class="jumbotron" style="background-color: white; text-align: center; padding-top: 5px; padding-bottom: 5px;">
+        <h1 class="display-4" style="font-size: 250%;">Welcome {{username}}!</h1>
+      </div>
+    </div>
+
+    <section id="orderList" class="orderList">
+      <div class="jumbotron" style="background-color: white; text-align: center; padding-top: 20px; padding-bottom: 5px;">
+          <h1 class="display-4" style="font-size: 250%;">Available Orders</h1>
+      </div>
+      <div class="container">
+        <div class="list-group">
+        <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Orders Number</th>
+                <th scope="col">Address</th>
+                <th scope="'col">Bidding</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for deliver in deliveries %}
+              <tr>
+                <td>{{deliver.0}}</td>
+                <td>{{deliver.1}}</td>
+                <td>
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <div class="form-outline mb-4">
+                          <input hidden id="orderNo" class="form-control" name="orderNo" value="{{deliver.0}}"/>
+                          <input id="val" class="form-control" name="val" value=""/>
+                          <label class="form-label" for="itemID">Please input amount before bidding.</label>
+                        <button name = "bidding" val type="submit" class="btn btn-primary">Bid</button>
+                    </form>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Order Number</th>
+                <th scope="col">Address</th>
+                <th scope="'col">Delivered?</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for accept in accepted %}
+              <tr>
+                <td>{{accept.0}}</td>
+                <td>{{accept.1}}</td>
+                <td>
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <div class="form-outline mb-4">
+                          <input hidden id="orderNod" class="form-control" name="orderNod" value="{{accept.0}}"/>
+                        <button name = "delivered" val type="submit" class="btn btn-primary">Yes</button>
+                    </form>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    <!-- <form action="/logout">
+        <input type = "submit" value = "Logout">
+      </form> -->
+      {% elif isManager%}
+      <p>ADMIN PAGE</p>
+    <div class = "container">
+      <div class="jumbotron" style="background-color: white; text-align: center; padding-top: 5px; padding-bottom: 5px;">
+        <h1 class="display-4" style="font-size: 250%;">Welcome {{username}} !</h1>
+      </div>
+    </div>
+
+    <section id="orderList" class="orderList">
+      <div class="jumbotron" style="background-color: white; text-align: center; padding-top: 20px; padding-bottom: 5px;">
+          <h1 class="display-4" style="font-size: 250%;">Available Actions</h1>
+      </div>
+      <div class="container">
+        
+        <form action="" method="POST">
+            {% csrf_token %}
+              <!-- changeSalary -->
+              <div class="form-outline mb-4">
+                <input type="text" id="salary" class="form-control" name="salary" />
+                <label class="form-label" for="salary">Input new salary</label>
+              </div>
+        
+              <!-- Role input -->
+              <div class="form-group">
+                <label for="chefs">Chefs</label>
+                <select class="form-control" id="chefs" name="chefs">
+                  {% for chef in chefs %}
+                  <option>UserID: ({{chef.0}}) | Name: {{chef.1}} | Salary: {{chef.2}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            
+              <!-- Submit button -->
+              <button name="changeSalary" type="submit" class="btn btn-primary btn-block mb-4">Change Salary</button>
+            </form>
+      </div>
+      <hr>
+    <!-- <form action="/logout">
+        <input type = "submit" value = "Logout">
+      </form> -->
+      <form action="" method="POST">
+        {% csrf_token %}
+          <!-- changeSalary -->
+          <div class="form-outline mb-4">
+            <input type="text" id="hours" class="form-control" name="hours" />
+            <label class="form-label" for="hours">Input new hours worked</label>
+          </div>
+          
+          <!-- Role input -->
+          <div class="form-group">
+            <label for="chefs">Chefs</label>
+            <select class="form-control" id="chefs2" name="chefs2">
+              {% for chef in chefs %}
+              <option>UserID: ({{chef.0}}) | Name: {{chef.1}} | Hours Worked: {{chef.3}}</option>
+              {% endfor %}
+            </select>
+          </div>
+        
+          <!-- Submit button -->
+          <button name="changeHours" type="submit" class="btn btn-primary btn-block mb-4">Change Hour</button>
+        </form>
+      </div>
+      <hr>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Order No</th>
+            <th scope="col">Bids</th>
+            <th scope="col">Accept</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for bid in bids %}
+            <tr>
+                <form action="" method="POST">
+                    {% csrf_token %}
+            <td>{{bid.0}}
+              <td hidden><input hidden id="ordernum" class="form-control" name="ordernum" value="{{bid.0}}"/></td-->
+            </td>
+            <td><div class="form-group">
+                <select class="form-control" id="bidselect" name="bidselect">
+                  {% for item in bid.1 %}
+                  <option>UserID: ({{item.0}}) | Name: ({{item.1}}) | Proposed bid: ({{item.2}})</option>
+                  {% endfor %}
+                </select>
+              </div></td>
+              <!--td hidden><input hidden id="driverID" class="form-control" name="driverID" value="{{bid.1.0}}"/></td>
+              <td hidden><input hidden id="proposedbid" class="form-control" name="proposedbid" value="{{bid.1.1}}"/></td-->
+            <td><button name="acceptBid" type="submit" class="btn btn-primary btn-block mb-4">Accept Bid</button></td>
+            </form>
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+      {% elif isCustomer%}
+        <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Order Number</th>
+                <th scope="col">Item</th>
+                <th scope="col">Chef Rating</th>
+                <th scope="'col">Chef Review</th>
+                <th scope="'col">Confirm</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr>
+                <form action="" method="POST">
+                  {% csrf_token %}
+                  {% for cooked in cookeds %}
+                <td> {{cooked.0}} </td>
+                <td> {{cooked.2}} </td>
+                <td> 
+                  <select class="form-control" id="crating" name="crating">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  </select> 
+                </td>
+                <td> <textarea name="creview" id="creview" cols="10" rows="5" class="form-control" style="background-color: white;"></textarea> </td>
+                <td>
+                  <div class="form-outline mb-4">
+                    <input hidden id="orderCNo" class="form-control" name="orderCNo" value="{{cooked.0}}"/>
+                    <input hidden id="itemCNo" class="form-control" name="itemCNo" value="{{cooked.1}}"/>
+                  </div>
+                  <button name = "chefrevs" val type="submit" class="btn btn-primary">Confirm</button>
+                </td>
+              </form>
+              </tr>
+              {% endfor %}
+
+            </tbody>
+          </table>
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Order Number</th>
+                <th scope="col">Delivery Rating</th>
+                <th scope="'col">Delivery Review</th>
+                <th scope="'col">Confirm</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr>
+                <form action="" method="POST">
+                  {% csrf_token %}
+                {% for delivered in delivereds %}
+                <td> {{delivered}} </td>
+                <td> 
+                  <select class="form-control" id="drating" name="drating">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  </select> 
+                </td>
+                <td> <textarea name="dreview" id="dreview" cols="10" rows="5" class="form-control" style="background-color: white;"></textarea> </td>
+                <td>
+                  <div class="form-outline mb-4">
+                    <input hidden id="orderDNo" class="form-control" name="orderDNo" value="{{delivered}}"/>
+                  </div>
+                  <button name = "devrevs" val type="submit" class="btn btn-primary">Confirm</button>
+                </td>
+              </form>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+      {% endif %}
+    </div>
+</div>
+
+{% endblock %}

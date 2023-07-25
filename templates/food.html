@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block head %}<title>{{food}}</title>{% endblock %}
+
+{% block content %}
+
+<p>FOOD PAGE</p>
+
+<div class = "container">
+    <div class="jumbotron" style="background-color: white; text-align: center; padding-top: 5px; padding-bottom: 5px;">
+        <h1 class="display-4" style="font-size: 250%;">{{food}}</h1>
+        <hr class="my-4">
+        <img src=""/>
+      <p>Chef: {{chef}}</p>
+      <p>Price: ${{price}}</p>
+      <p>Rating: {{rating}}/5</p>
+      <p>Description: {{description}}</p>
+    </div>
+    {% if isCustomer %}
+  <form action="/food" method="POST">
+    <!-- Added Balance input -->
+    <div class="form-outline mb-4">
+      <input type="text" id="yourRating" class="form-control" name="yourRating" />
+      <label class="form-label" for="yourRating">Your Rating</label>
+    </div>
+    <!-- Submit button -->
+    <button type="submit" class="btn btn-primary btn-block mb-4">Submit Rating</button>
+  
+  </form>
+  {% endif %}
+
+  <!-- <section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-5 col-md-6 col-12 pb-4">
+                <h1>Comments</h1>
+                {% for name in names %}
+                <div class="comment mt-4 text-justify float-left">
+                    <h4>{{name}}</h4>
+                    <span>- 20 October, 2018</span>
+                    <br>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus numquam assumenda hic aliquam vero sequi velit molestias doloremque molestiae dicta?</p>
+                </div>
+                {% endfor %}
+                <div class="comment mt-4 text-justify float-left">
+                    <h4>John Doe</h4>
+                    <span>- 20 October, 2018</span>
+                    <br>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus numquam assumenda hic aliquam vero sequi velit molestias doloremque molestiae dicta?</p>
+                </div>
+                <div class="comment mt-4 text-justify float-left">
+                    <h4>Rob Simpson</h4>
+                    <span>- 20 October, 2018</span>
+                    <br>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus numquam assumenda hic aliquam vero sequi velit molestias doloremque molestiae dicta?</p>
+                </div>
+                <div class="comment mt-4 text-justify float-left">
+                    <h4>Jhon Doe</h4>
+                    <span>- 20 October, 2018</span>
+                    <br>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus numquam assumenda hic aliquam vero sequi velit molestias doloremque molestiae dicta?</p>
+                </div>
+                <div class="comment mt-4 text-justify float-left">
+                    <h4>Rob Simpson</h4>
+                    <span>- 20 October, 2018</span>
+                    <br>
+                    <p >Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus numquam assumenda hic aliquam vero sequi velit molestias doloremque molestiae dicta?</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-5 col-sm-4 offset-md-1 offset-sm-1 col-12 mt-4">
+                <form id="algin-form">
+                    <div class="form-group">
+                        <h4>Leave a comment</h4>
+                        <label for="message">Message</label>
+                        <textarea name="msg" id="msg" cols="30" rows="5" class="form-control" style="background-color: white;"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" id="post" class="btn">Post Comment</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section> -->
+</div>
+
+{% endblock %}

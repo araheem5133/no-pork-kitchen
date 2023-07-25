@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block head %}<title>{{username}}'s Profile</title>{% endblock %}
+
+{% block content %}
+
+<p>PROFILE PAGE</p>
+
+<div class = "container">
+    <div class="jumbotron" style="background-color: white; text-align: center; padding-top: 5px; padding-bottom: 5px;">
+        <h1 class="display-4" style="font-size: 250%;">{{username}}'s Profile</h1>
+        <hr class="my-4">
+      <p>Name: {{name}}</p>
+      <p>Role: {{role}}</p>
+      {% if isCustomer %}
+      <p>VIP: {{VIP}}</p>
+      {% endif %}
+      <p>Address: {{address}}</p>
+      <p>Number of Warnings: {{warning}}</p>
+      {% if isCustomer %}
+      <p>Current Balance: {{balance}}</p>
+      {% endif %}
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Order</th>
+            <th scope="col">Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in orders %}
+          <tr>
+            <td>John Smith</td>
+            <td>order</td>
+            <td>$5</td>
+          </tr>
+          {% endfor %}
+          <!-- <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr> -->
+        </tbody>
+      </table>
+    </div>
+    {% if isCustomer %}
+  <form action="/profile" method="POST">
+    <!-- Added Balance input -->
+    <div class="form-outline mb-4">
+      <input type="text" id="addedBalance" class="form-control" name="addedBalance" />
+      <label class="form-label" for="addedBalance">Money</label>
+    </div>
+    <!-- Submit button -->
+    <button type="submit" class="btn btn-primary btn-block mb-4">Deposit</button>
+  
+  </form>
+  {% endif %}
+</div>
+
+{% endblock %}

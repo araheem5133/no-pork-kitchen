@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block head %}<title>Chef Dashboard</title>{% endblock %}
+
+{% block content %}
+
+<div class = "container">
+    <div class="jumbotron" style="background-color: white; text-align: center; padding-top: 5px; padding-bottom: 5px;">
+        <h1 class="display-4" style="font-size: 250%;">Chef Dashboard</h1>
+        <hr class="my-4">
+      <h4>Incoming Orders</h4>
+      <br>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Orders</th>
+            <th scope="'col">Prepared?</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in orders %}
+          <tr>
+            <td>
+                <table class="table">
+                    <thead>
+                        <th scope="col">Item</th>
+                        <th scope="col">Quantity</th>
+                    </thead>
+                    <tbody>
+                        {% for item in order %}
+                        <tr>
+                            <td>{{item}}</td>
+                            <td>1</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </td>
+            <td><a href="#" class="btn btn-success">Yes</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <br>
+      <a href="#" class="btn btn-primary">Add Item to Menu</a>
+    </div>
+</div>
+
+{% endblock %}

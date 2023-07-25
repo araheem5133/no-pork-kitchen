@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+<html>
+  <head>
+    {% block head %}
+    <title>Guest page</title>
+    {% endblock %}
+  </head>
+  <body>
+    {% load static %}
+    {% block navbar %}
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">No Pork Kitchen</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav ml-auto">
+                <a class="nav-item nav-link active" href="/playground/guest">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="/playground/login">Login</a>
+              </div>
+            </div>
+          </nav>
+        {% endblock %}
+
+    {% block content %}
+    <p>GUEST PAGE</p>
+    
+    <div class = "container">
+      <div class="jumbotron" style="background-color: white; text-align: center; padding-top: 5px; padding-bottom: 5px;">
+        <h1 class="display-4" style="font-size: 250%;">Welcome to No Pork Kitchen!</h1>
+      </div>
+      
+      <div class="input-group">
+        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+        <button type="button" class="btn btn-outline-primary">search</button>
+      </div>
+      </div>
+      
+      <section id="foods" class="foods">
+        <div class="jumbotron" style="background-color: white; text-align: center; padding-top: 20px; padding-bottom: 5px;">
+            <h1 class="display-4" style="font-size: 250%;">Top Food</h1>
+        </div>
+        <div class="container">
+            
+            <div class="row">
+                <div class="col-sm">
+                    <div class="card project-tile" style="width: 18rem;">
+                        <img class="card-img-top" src="{% static 'wonton.jpg' %}" alt="Food 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Fried Chicken Wonton</h5>
+                            <p class="card-text">Twelve pieces. Chicken wrapped in a crispy wheat-based wrapper.</p>
+                            <!--a href="#" class="btn btn-primary">More Details</a-->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div class="card project-tile" style="width: 18rem;">
+                        <img class="card-img-top" src="{% static 'friedshrimp.jpg' %}" alt="Food 2">
+                        <div class="card-body">
+                            <h5 class="card-title">Beef Dumplings</h5>
+                            <p class="card-text">Eight pieces. Steamed dumplings with tender and savory beef filling.</p>
+                            <!--a href="#" class="btn btn-primary">More Details</a-->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div class="card project-tile" style="width: 18rem;">
+                        <img class="card-img-top" src="{% static 'dumpling.jpg' %}" alt="Food 3">
+                        <div class="card-body">
+                            <h5 class="card-title">Crispy Fried Jumbo Shrimp</h5>
+                            <p class="card-text">Five pieces. Jumbo shrimp coated in seasoned bread crumbs, and deep fried to golden brown perfection.</p>
+                            <!--a href="#" class="btn btn-primary">More Details</a-->
+                        </div>
+                      </div>
+                </div>
+            </div>
+          </div>
+
+    {% endblock %}
+  </body>
+</html>

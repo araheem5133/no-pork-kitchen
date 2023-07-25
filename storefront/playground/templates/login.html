@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+<html>
+  <head>
+    {% block head %}
+    <title>Login Page</title>
+    {% endblock %}
+  </head>
+
+  <body>
+    
+    {% block navbar %}
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <a class="navbar-brand" href="#">No Pork Kitchen</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav ml-auto">
+              <a class="nav-item nav-link active" href="/playground/guest">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-item nav-link" href="/playground/login">Login</a>
+            </div>
+          </div>
+        </nav>
+      {% endblock %}
+      {% block content %}
+      <br>
+    <!-- <form action="/auth">
+      <p> Username: <input type = "text" name = "username"> </p>
+      <p> Password: <input type = "text" name = "password"> </p>
+      <input type = "submit" value = "Submit">
+    </form> -->
+    <div class = "container">
+      <div class="jumbotron" style="background-color: white; text-align: center; padding-top: 5px; padding-bottom: 5px;">
+        <h1 class="display-4" style="font-size: 250%;">Login Page</h1>
+      </div>
+    {% for msg in messages %}
+      {{msg}}
+    {% endfor %}
+    {% load static %}
+    <form action="" method="POST">
+        {% csrf_token %}
+      <!-- Username input -->
+      <div class="form-outline mb-4">
+        <input type="text" id="username" class="form-control" name="username" />
+        <label class="form-label" for="username">Username</label>
+      </div>
+    
+      <!-- Password input -->
+      <div class="form-outline mb-4">
+        <input type="password" id="password" class="form-control" name="password" />
+        <label class="form-label" for="password">Password</label>
+      </div>
+    
+      <!-- Submit button -->
+      <button name="login" type="submit" class="btn btn-primary btn-block mb-4">Log in</button>
+    
+      <!-- Register buttons -->
+      <div class="text-center">
+        <p>First Time User? <a href="/playground/register">Register</a></p>
+      </div>
+    </form>
+  </div>
+    {% endblock %}
+
+  </body>
+</html>

@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block head %}<title>{{username}}'s Profile</title>{% endblock %}
+
+{% block content %}
+
+<p>PROFILE PAGE</p>
+
+<div class = "container">
+    <div class="jumbotron" style="background-color: white; text-align: center; padding-top: 5px; padding-bottom: 5px;">
+        <h1 class="display-4" style="font-size: 250%;">{{username}}'s Profile</h1>
+        <hr class="my-4">
+      <p>Name: {{name}}</p>
+      <p>Role: {{role}}</p>
+      {% if isCustomer %}
+      <p>VIP: {{VIP}}</p>
+      <p>Address: {{address}}</p>
+      <p>Current Balance: {{balance}}</p>
+      {% endif %}
+      {% if isDelivery %}
+      <p>Total Distance Delivered: {{distance}}</p>
+      <p>Earnings: {{earnings}}</p>
+      <p>Number of Deliveries: {{deliveries}}</p>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Order Number</th>
+            <th scope="col">Rating</th>
+            <th scope="col">Review</th>
+          </tr>
+        </thead>
+        <tbody>
+            
+        {% for dreview in dreviews %}
+          <tr>
+            <td>{{dreview.0}}</td>
+            <td>{{dreview.1}}</td>
+            <td>{{dreview.2}}</td>
+          </tr>
+        {% endfor %}
+
+        </tbody>
+      </table>
+      {% endif %}
+      {% if isChef %}
+      <p>Salary: {{salary}}</p>
+      <p>Hours Worked: {{hours}}</p>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Order Number</th>
+            <th scope="col">Item</th>
+            <th scope="col">Rating</th>
+            <th scope="col">Review</th>
+          </tr>
+        </thead>
+        <tbody>
+            
+        {% for creview in creviews %}
+          <tr>
+            <td>{{creview.0}}</td>
+            <td>{{creview.1}}</td>
+            <td>{{creview.2}}</td>
+            <td>{{creview.3}}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+      <p>Number of Warnings: {{warning}}</p>
+      {% if isCustomer %}
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Order Number</th>
+            <th scope="col">Total Price</th>
+            <th scope="col">Delivery Man</th>
+          </tr>
+        </thead>
+        <tbody>
+            
+        {% for order in orders %}
+          <tr>
+            {% for item in order %}
+            <td>{{item}}</td>
+            {% endfor %}
+          </tr>
+        {% endfor %}
+
+        </tbody>
+      </table>
+      {% endif %}
+    {% if isCustomer %}
+  <form action="/playground/profile/" method="POST">
+    {% csrf_token %}
+    <!-- Added Balance input -->
+    <div class="form-outline mb-4">
+      <input type="text" id="addedBalance" class="form-control" name="addedBalance" />
+      <label class="form-label" for="addedBalance">Money</label>
+    </div>
+    <!-- Submit button -->
+    <button id = "bal" name = "bal" type="submit" class="btn btn-primary btn-block mb-4">Deposit</button>
+  
+  </form>
+  {% endif %}
+</div>
+
+{% endblock %}

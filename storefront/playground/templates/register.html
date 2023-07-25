@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+<html>
+  <head>
+    {% block head %}
+    <title>Registration Page</title>
+    {% endblock %}
+  </head>
+
+  <body>
+    {% block navbar %}
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <a class="navbar-brand" href="#">No Pork Kitchen</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav ml-auto">
+              <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-item nav-link" href="/playground/login">Login</a>
+            </div>
+          </div>
+        </nav>
+      {% endblock %}
+
+      {% block content %}
+      <br>
+    <!-- <form action="/auth">
+      <p> Username: <input type = "text" name = "username"> </p>
+      <p> Password: <input type = "text" name = "password"> </p>
+      <input type = "submit" value = "Submit">
+    </form> -->
+    <div class = "container">
+      <div class="jumbotron" style="background-color: white; text-align: center; padding-top: 5px; padding-bottom: 5px;">
+        <h1 class="display-4" style="font-size: 250%;">Registration Page</h1>
+      </div>
+      {% for msg in messages %}
+        {{msg}}
+      {% endfor %}
+    <form action="" method="POST">
+    {% csrf_token %}
+      <!-- Name input -->
+      <div class="form-outline mb-4">
+        <input type="text" id="name" class="form-control" name="name" />
+        <label class="form-label" for="name">First and Last Name</label>
+      </div>
+
+      <!-- Address input -->
+      <div class="form-outline mb-4">
+        <input type="text" id="address" class="form-control" name="address" />
+        <label class="form-label" for="address">Address</label>
+      </div>
+
+      <!-- Username input -->
+      <div class="form-outline mb-4">
+        <input type="text" id="new_user" class="form-control" name="new_user" />
+        <label class="form-label" for="new_user">Username</label>
+      </div>
+    
+      <!-- Password input -->
+      <div class="form-outline mb-4">
+        <input type="password" id="new_pswd" class="form-control" name="new_pswd" />
+        <label class="form-label" for="new_pswd">Password</label>
+      </div>
+
+      <!-- Re-type Password input -->
+      <div class="form-outline mb-4">
+        <input type="password" id="re_pswd" class="form-control" name="re_pswd" />
+        <label class="form-label" for="re_pswd">Re-enter Password</label>
+      </div>
+
+      <!-- Role input -->
+      <div class="form-group">
+        <label for="role">Role</label>
+        <select class="form-control" id="role" name="role">
+          <option>Customer</option>
+          <option>Chef</option>
+          <option>Delivery</option>
+        </select>
+      </div>
+    
+      <!-- Submit button -->
+      <button name="register" type="submit" class="btn btn-primary btn-block mb-4">Register</button>
+    </form>
+  </div>
+    {% endblock %}
+
+    <!-- <form action="/auth">
+      <p> Username: <input type = "text" name = "username"> </p>
+      <p> Password: <input type = "text" name = "password"> </p>
+      <label for = "userType">Choose a role:</label>
+        <select id = "userType" name = "userType">
+          <option value = "customer">Customer</option>
+          <option value = "chef">Chef</option>
+          <option value = "delivery">Delivery Person</option>
+        </select>
+      <input type = "Signup" value = "Sign Up">
+    </form> -->
+
+  </body>
+</html>

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block head %}<title>Customer page</title>{% endblock %}
+
+{% block content %}
+
+<p>CUSTOMER PAGE</p>
+
+{% if logged %}
+<div class = "container">
+<div class="jumbotron" style="background-color: white; text-align: center; padding-top: 5px; padding-bottom: 5px;">
+  <h1 class="display-4" style="font-size: 250%;">Welcome {{username}}!</h1>
+</div>
+
+<div class="input-group">
+  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+  <button type="button" class="btn btn-outline-primary">search</button>
+</div>
+</div>
+
+<section id="foods" class="foods">
+  <div class="jumbotron" style="background-color: white; text-align: center; padding-top: 20px; padding-bottom: 5px;">
+      <h1 class="display-4" style="font-size: 250%;">Top Food</h1>
+  </div>
+  <div class="container">
+      
+      <div class="row">
+          <div class="col-sm">
+              <div class="card project-tile" style="width: 18rem;">
+                  <img class="card-img-top" src="images/-.png" alt="Food 1">
+                  <div class="card-body">
+                      <h5 class="card-title">Food #1</h5>
+                      <p class="card-text">This food #1 is good.</p>
+                      <a href="#" class="btn btn-primary">More Details</a>
+                  </div>
+              </div>
+          </div>
+          <div class="col-sm">
+              <div class="card project-tile" style="width: 18rem;">
+                  <img class="card-img-top" src="images/-.png" alt="Food 2">
+                  <div class="card-body">
+                      <h5 class="card-title">Food #2</h5>
+                      <p class="card-text">This food #2 is good.</p>
+                      <a href="#" class="btn btn-primary">More Details</a>
+                  </div>
+              </div>
+          </div>
+          <div class="col-sm">
+              <div class="card project-tile" style="width: 18rem;">
+                  <img class="card-img-top" src="images/-.png" alt="Food 3">
+                  <div class="card-body">
+                      <h5 class="card-title">Food #3</h5>
+                      <p class="card-text">This food #3 is good.</p>
+                      <a href="#" class="btn btn-primary">More Details</a>
+                  </div>
+                </div>
+          </div>
+      </div>
+    </div>
+{% endif %}
+
+{% endblock %}

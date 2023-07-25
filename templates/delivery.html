@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    {% block head %}
+    <title>Delivery page</title>
+    {% endblock %}
+  </head>
+  <body>
+    {% block content %}
+    <p>DELIVERY PAGE</p>
+    {% if logged %}
+    <div class = "container">
+      <div class="jumbotron" style="background-color: white; text-align: center; padding-top: 5px; padding-bottom: 5px;">
+        <h1 class="display-4" style="font-size: 250%;">Welcome {{username}}!</h1>
+      </div>
+    </div>
+
+    <section id="orderList" class="orderList">
+      <div class="jumbotron" style="background-color: white; text-align: center; padding-top: 20px; padding-bottom: 5px;">
+          <h1 class="display-4" style="font-size: 250%;">Orders to be Delivered</h1>
+      </div>
+      <div class="container">
+        <div class="list-group">
+        {% for order in orders %}
+        <a href="#" class="list-group-item list-group-item-action">{{order}}</a>
+        {% endfor %}
+        </div>
+      </div>
+    <!-- <form action="/logout">
+        <input type = "submit" value = "Logout">
+      </form> -->
+    {% endif %}
+    {% endblock %}
+  </body>
+</html>
